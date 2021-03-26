@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyPlugin = require("copy-webpack-plugin");
 const isDevelopment = process.env.NODE_ENV !== 'production'
 
 module.exports = {
@@ -16,7 +17,12 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, 'public', 'index.html'),
       inject: 'body'
-    })
+    }),
+    new CopyPlugin({
+      patterns: [
+        { from: "./src/assets", to: "assets" },
+      ],
+    }),
   ].filter(Boolean),
   devServer: {
     contentBase: path.resolve(__dirname, 'public'),
@@ -29,6 +35,7 @@ module.exports = {
         use: "ts-loader",
         exclude: /node_modules/,
       },
+
     ],
   },
 }
