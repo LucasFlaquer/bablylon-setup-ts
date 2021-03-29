@@ -1,5 +1,5 @@
 
-interface Note {
+export interface Note {
   name: string
   octave: number
   semi: boolean
